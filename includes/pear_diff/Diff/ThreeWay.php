@@ -54,7 +54,7 @@ class Text_Diff_ThreeWay extends Text_Diff {
 
     /**
      */
-    function mergedOutput($label1 = false, $label2 = false)
+    function mergedOutput($label1 = '', $label2 = '')
     {
         $lines = array();
         foreach ($this->_edits as $edit) {

@@ -157,7 +157,7 @@ class RainTPL{
 				return "<div style=\"background-color:#f8f8ff; border: 1px solid #aaaaff; padding:10px;\">Template <b>$tpl_name</b> not found</div>";
 			else{
 				echo "<div style=\"background-color:#f8f8ff; border: 1px solid #aaaaff; padding:10px;\">Template <b>$tpl_name</b> not found</div>";
-				return null;
+				return "";
 			}
 		}
 		elseif( is_dir( RainTPL::$tpl_compile_dir . RainTPL::$tpl_dir ) && !is_writable( RainTPL::$tpl_compile_dir."/" ) )

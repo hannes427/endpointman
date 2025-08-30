@@ -142,7 +142,7 @@ if (!class_exists("DateTimeZone")) {
 					return $transition['offset'];
 				}
 			}
-			return;
+			return 0;
 		}
 		function getTransitions() {
 			$this->getZDump();

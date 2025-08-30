@@ -231,7 +231,7 @@
                                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="<?php echo $srow['key']; ?>"></i>
                                                         </div>
                                                         <div class="col-md-9">
-															<input type="text" class="form-control" id="<?php echo $srow['key']; ?>" name="<?php echo $srow['key']; ?>" placeholder="" value="<?php echo $srow['value']; ?>" size="<?php echo (isset($srow['max_chars']) ? $srow['max_chars'] : "90" ); ?>">
+															<input type="text" class="form-control" id="<?php echo $srow['key']; ?>" name="<?php echo $srow['key']; ?>" placeholder="" value="<?php echo $srow['value'] ?? ''; ?>" size="<?php echo (isset($srow['max_chars']) ? $srow['max_chars'] : "90" ); ?>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,7 +265,7 @@
                                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="<?php echo $srow['key']; ?>"></i>
                                                         </div>
                                                         <div class="col-md-9">
-	                      									<textarea class="form-control" id="<?php echo $srow['key']; ?>" name="<?php echo $srow['key']; ?>" rows="<?php echo (isset($srow['rows']) ? $srow['rows'] : "2" ); ?>" cols="<?php echo (isset($srow['cols']) ? $srow['cols'] : "20" ); ?>"><?php echo $srow['value']; ?></textarea>
+												<textarea class="form-control" id="<?php echo $srow['key']; ?>" name="<?php echo $srow['key']; ?>" rows="<?php echo (isset($srow['rows']) ? $srow['rows'] : "2" ); ?>" cols="<?php echo (isset($srow['cols']) ? $srow['cols'] : "20" ); ?>"><?php echo $srow['value'] ?? ''; ?></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -396,7 +396,7 @@
                                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="<?php echo $srow['key']; ?>"></i>
                                                         </div>
                                                         <div class="col-md-9">
-															<input type="checkbox" class="form-control" name="<?php echo $srow['key']; ?>" id="<?php echo $srow['key']; ?>" value="<?php echo $srow['value']; ?>">';
+															<input type="checkbox" class="form-control" name="<?php echo $srow['key']; ?>" id="<?php echo $srow['key']; ?>" value="<?php echo $srow['value'] ?? ''; ?>">';
                                                         </div>
                                                     </div>
                                                 </div>

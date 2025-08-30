@@ -81,7 +81,7 @@
 			if( count( $debug_array = debug_backtrace() )>3 ){
 				$html .= '<div class="ei">'."\n";
 			    for( $i = 3; $i < count( $debug_array ); $i++ )
-				   	$html .= "-" . str_replace( SITE_DIR, "", isset( $debug_array[$i]['file'] ) ? $debug_array[ $i ][ 'file' ] : null ) . " : " . ( isset($debug_array[$i]['line']) ? $debug_array[$i]['line'] : null ). "<br/>\n";
+					$html .= "-" . str_replace( SITE_DIR, "", isset( $debug_array[$i]['file'] ) ? $debug_array[ $i ][ 'file' ] : "" ) . " : " . ( isset($debug_array[$i]['line']) ? $debug_array[$i]['line'] : "" ). "<br/>\n";
 				$html .= "</div>";	   	
 			}			
 			$html .= "</div>";
@@ -96,7 +96,7 @@
 		// add info about url and post var into error log
 		$file = LOG_DIR . ( $date = date( "Y_m_d" ) ) . ".php";
 		if( $GLOBALS['error_n'] == 1 )
-			$html = ( !file_exists( $file ) ? "{$date} {$_SERVER['SERVER_SOFTWARE']} <br/>\n" : null ) . "<br/><br/>\n\n" . "<a name=\"{$GLOBALS['error_time']}\"></a>#{$GLOBALS['error_time']} {$_SERVER['REQUEST_URI']}" . ($_SERVER['REQUEST_METHOD']=='POST'?"POST: <br/>\n<pre>" . print_r( $GLOBALS['HTTP_POST_VARS'] , true ) : null ) . "</pre><br/><br/>\n\n" . $html;
+			$html = ( !file_exists( $file ) ? "{$date} {$_SERVER['SERVER_SOFTWARE']} <br/>\n" : "" ) . "<br/><br/>\n\n" . "<a name=\"{$GLOBALS['error_time']}\"></a>#{$GLOBALS['error_time']} {$_SERVER['REQUEST_URI']}" . ($_SERVER['REQUEST_METHOD']=='POST'?"POST: <br/>\n<pre>" . print_r( $GLOBALS['HTTP_POST_VARS'] , true ) : "" ) . "</pre><br/><br/>\n\n" . $html;
 		error_log( $html, 3, $file );
 	}
 

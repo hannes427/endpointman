@@ -161,6 +161,8 @@ if($_REQUEST['pop_type'] == 'global_over') {
     }
     if(isset($settings)) {
         $settings = unserialize($settings);
+    }
+    if (is_array($settings)) {
         $settings['tz'] = $endpoint->listTZ($settings['tz']);
     } else {
         $settings['srvip'] = $endpoint->global_cfg['srvip'];
@@ -222,7 +224,7 @@ if($_REQUEST['pop_type'] == "alt_cfg_edit") {
                 $time = time();
                 $sql = 'SELECT endpointman_template_list.name, endpointman_template_list.config_files_override, endpointman_template_list.product_id FROM endpointman_template_list WHERE endpointman_template_list.id = '.$_REQUEST['tid'];
                 $row = $endpoint->eda->sql($sql, 'getRow', DB_FETCHMODE_ASSOC);
-                $config_fs = unserialize($row['config_files_override']);
+                $config_fs = is_string($row['config_files_override']) ? unserialize($row['config_files_override']) : array();
 
                 $sql = 'INSERT INTO endpointman_custom_configs (name, original_name, product_id, data) VALUES ("'.$row['name'].'_'.$time.'","'.addslashes($cfg_filename).'","'.$row['product_id'].'","'.addslashes($_REQUEST['config_text']).'")';
                 $endpoint->eda->sql($sql);
@@ -285,7 +287,7 @@ if($_REQUEST['pop_type'] == "alt_cfg_edit") {
                 $time = time();
                 $sql = 'SELECT endpointman_mac_list.mac, endpointman_mac_list.config_files_override, endpointman_model_list.product_id FROM endpointman_mac_list, endpointman_model_list WHERE endpointman_mac_list.model = endpointman_model_list.id AND endpointman_mac_list.id = '.$_REQUEST['tid'];
                 $row = $endpoint->eda->sql($sql, 'getRow', DB_FETCHMODE_ASSOC);
-                $config_fs = unserialize($row['config_files_override']);
+                $config_fs = is_string($row['config_files_override']) ? unserialize($row['config_files_override']) : array();
 
                 $sql = 'INSERT INTO endpointman_custom_configs (name, original_name, product_id, data) VALUES ("'.$row['mac'].'_'.$time.'","'.addslashes($cfg_filename).'","'.$row['product_id'].'","'.addslashes($_REQUEST['config_text']).'")';
                 $endpoint->eda->sql($sql);

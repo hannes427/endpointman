@@ -9,7 +9,7 @@
 
 include 'includes/functions.inc';
 
-$debug = NULL;
+$debug = "";
 $endpoint = new endpointmanager();
 
 if (!is_writeable(PHONE_MODULES_PATH)) {

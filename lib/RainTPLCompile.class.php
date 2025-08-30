@@ -200,13 +200,13 @@ class RainTPLCompile{
 			elseif( preg_match( '/(?:\{include="(.*?)"\})/', $html, $code ) ){
 			
 				//variables substitution
-				$include_var = $this->var_replace( $code[ 1 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $this_loop_name = $parent_loop[ $level ] );
+				$include_var = $this->var_replace( $code[ 1 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $this_loop_name = $parent_loop[ $level ] ?? '' );
 
 				//dynamic include
 				$compiled_code .= "<?php\n" .
 								 $space . "	\$tpl = new RainTPL( RainTPL::\$tpl_dir . dirname(\"{$include_var}\"));\n" .
 								 $space . "	\$tpl->assign( \$var );\n" .
-								 $space . "	" . ( !$this_loop_name ? null : "\$tpl->assign( \"key\", \$key{$this_loop_name} );\n" . "\$tpl->assign( \"value\", \$value{$this_loop_name} );\n" ) .
+								 $space . "	" . ( !$this_loop_name ? "" : "\$tpl->assign( \"key\", \$key{$this_loop_name} );\n" . "\$tpl->assign( \"value\", \$value{$this_loop_name} );\n" ) .
 								 $space . "	\$tpl->draw(basename(\"{$include_var}\"));" . "\n" .
 								 "?>";
 			}
@@ -360,7 +360,7 @@ class RainTPLCompile{
 	 * @param string $loop_name Loop name
 	 * @return string Replaced code
 	 */
-	function var_replace( $html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_name = null ){
+	function var_replace( $html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = "", $php_right_delimiter = "", $loop_name = null ){
 
 		//all variables
 		$html = preg_replace( '/\{\#(\w+)\#\}/', $php_left_delimiter . '\\1' . $php_right_delimiter, $html );
@@ -378,7 +378,7 @@ class RainTPLCompile{
 			$extra_var = $matches[ 2 ][ $i ];
 			
 			//function associate to variable
-			$function_var = ( $extra_var and $extra_var[0] == '|') ? substr( $extra_var, 1 ) : null;
+			$function_var = ( $extra_var and $extra_var[0] == '|') ? substr( $extra_var, 1 ) : "";
 			
 			//variable path split array (ex. $news.title o $news[title]) or object (ex. $news->title)
 			$temp = preg_split( "/\.|\[|\-\>/", $var );
